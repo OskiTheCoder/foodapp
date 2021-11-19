@@ -4,7 +4,17 @@ const functions = require('firebase-functions');
 // https://firebase.google.com/docs/functions/write-firebase-functions
 
 const app = require('express')();
-const { getAllRecipes } = require('./APIs/recipes');
+const {
+  editRecipe,
+  deleteRecipe,
+  postOneRecipe,
+  getAllRecipes,
+} = require('./APIs/recipes');
 
+// recipes
 app.get('/recipes', getAllRecipes);
+app.post('/recipe', postOneRecipe);
+app.delete('/recipe/:recipeId', deleteRecipe);
+app.put('/recipe/:recipeId', editRecipe);
+
 exports.api = functions.https.onRequest(app);
